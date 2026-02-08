@@ -115,7 +115,6 @@ export default function HomePage() {
   return (
     <>
       <ScrollProgress />
-
       {/* Hero Section with Aurora Background */}
       <AuroraBackground>
         <motion.div
