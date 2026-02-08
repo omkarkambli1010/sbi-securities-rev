@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Button, AuroraBackground } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
 import { FadeIn } from '@/components/animations/FadeIn/FadeIn';
 import { MagneticButton } from '@/components/animations/MagneticButton/MagneticButton';
@@ -15,39 +15,64 @@ function AnimatedTitle({ text }: { text: string }) {
   const words = text.split(' ');
 
   return (
-    <h1
-      style={{
-        fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-        lineHeight: 1.2,
-        marginBottom: '2rem',
-        fontWeight: 800,
-        letterSpacing: '-0.02em',
-      }}
-    >
-      {words.map((word, wordIndex) => (
-        <span
-          key={wordIndex}
-          style={{ display: 'inline-block', marginRight: '0.75rem' }}
-        >
-          {word.split('').map((letter, letterIndex) => (
-            <motion.span
-              key={`${wordIndex}-${letterIndex}`}
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                delay: wordIndex * 0.1 + letterIndex * 0.03,
-                type: 'spring',
-                stiffness: 150,
-                damping: 25,
-              }}
-              className="text-gradient"
-              style={{ display: 'inline-block' }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </span>
-      ))}
+    <h1 className="relative" style={{ marginBottom: '2rem' }}>
+      {/* Glow layer behind the text */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 animate-hero-gradient blur-xl brightness-110"
+        style={{
+          fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+          lineHeight: 1.2,
+          fontWeight: 500,
+          letterSpacing: '-0.02em',
+          background: 'linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800, #00cfff)',
+          backgroundSize: '300% 100%',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          opacity: 0.6,
+        }}
+      >
+        {text}
+      </span>
+      {/* Visible text layer */}
+      <span className="relative">
+        {words.map((word, wordIndex) => (
+          <span
+            key={wordIndex}
+            style={{ display: 'inline-block', marginRight: '0.75rem' }}
+          >
+            {word.split('').map((letter, letterIndex) => (
+              <motion.span
+                key={`${wordIndex}-${letterIndex}`}
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  delay: wordIndex * 0.1 + letterIndex * 0.03,
+                  type: 'spring',
+                  stiffness: 150,
+                  damping: 25,
+                }}
+                className="animate-hero-gradient"
+                style={{
+                  display: 'inline-block',
+                  fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+                  lineHeight: 1.2,
+                  fontWeight: 500,
+                  letterSpacing: '-0.02em',
+                  background: 'linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800, #00cfff)',
+                  backgroundSize: '300% 100%',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </span>
+        ))}
+      </span>
     </h1>
   );
 }
@@ -115,8 +140,8 @@ export default function HomePage() {
   return (
     <>
       <ScrollProgress />
-      {/* Hero Section with Aurora Background */}
-      <AuroraBackground>
+      {/* Hero Section */}
+      <section style={{ minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -159,7 +184,7 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
-      </AuroraBackground>
+      </section>
 
       <div className="container">
         {/* Stats Section */}
