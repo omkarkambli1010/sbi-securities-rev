@@ -1,0 +1,105 @@
+// ============================================
+// MAIN STYLESHEET
+// Modern Animated Website - SBI Securities
+// ============================================
+
+// 1. ABSTRACTS - Variables, functions, mixins
+@import '../styles/abstracts/variables';
+@import '../styles/abstracts/functions';
+@import '../styles/abstracts/mixins';
+@import '../styles/abstracts/breakpoints';
+
+// 2. BASE - Reset, typography, global styles
+@import '../styles/base/reset';
+@import '../styles/base/typography';
+@import '../styles/base/global';
+
+// 3. THEMES - Light and dark theme definitions
+@import '../styles/themes/light';
+@import '../styles/themes/dark';
+@import '../styles/themes/theme';
+
+// 4. LAYOUT - Grid system and containers
+@import '../styles/layout/grid';
+@import '../styles/layout/container';
+
+// 5. UTILITIES - Helper classes
+@import '../styles/utilities/spacing';
+@import '../styles/utilities/animations';
+@import '../styles/utilities/helpers';
+
+// ============================================
+// CUSTOM GLOBAL STYLES
+// ============================================
+
+// Ensure smooth font rendering
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Custom scrollbar for the whole page
+body {
+  @include custom-scrollbar(10px, var(--color-background), var(--color-border), var(--color-muted));
+}
+
+// Main content wrapper
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+// Accessibility - Skip to main content link
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// Loading indicator
+.loading-spinner {
+  @include flex-center;
+  min-height: 100vh;
+
+  &::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Image optimization
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Prevent layout shift for loading images
+img[loading='lazy'] {
+  min-height: 1px;
+}
+
+// Smooth scroll anchors
+[id] {
+  scroll-margin-top: 100px;
+}

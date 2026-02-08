@@ -1,0 +1,179 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// ============================================
+// GRID SYSTEM
+// ============================================
+
+.grid {
+  display: grid;
+  gap: $spacing-lg;
+
+  &-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  &-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  &-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  &-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  // Responsive grid
+  &-responsive {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  &-responsive-lg {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+// Gap utilities
+.gap {
+  &-xs {
+    gap: $spacing-xs;
+  }
+
+  &-sm {
+    gap: $spacing-sm;
+  }
+
+  &-md {
+    gap: $spacing-md;
+  }
+
+  &-lg {
+    gap: $spacing-lg;
+  }
+
+  &-xl {
+    gap: $spacing-xl;
+  }
+
+  &-2xl {
+    gap: $spacing-2xl;
+  }
+}
+
+// Column span
+.col-span {
+  &-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  &-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  &-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  &-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  &-6 {
+    grid-column: span 6 / span 6;
+  }
+
+  &-12,
+  &-full {
+    grid-column: 1 / -1;
+  }
+}
+
+// ============================================
+// FLEX UTILITIES
+// ============================================
+
+.flex {
+  display: flex;
+
+  &-row {
+    flex-direction: row;
+  }
+
+  &-col {
+    flex-direction: column;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-between {
+    justify-content: space-between;
+  }
+
+  &-around {
+    justify-content: space-around;
+  }
+
+  &-evenly {
+    justify-content: space-evenly;
+  }
+
+  &-start {
+    justify-content: flex-start;
+  }
+
+  &-end {
+    justify-content: flex-end;
+  }
+
+  &-items-center {
+    align-items: center;
+  }
+
+  &-items-start {
+    align-items: flex-start;
+  }
+
+  &-items-end {
+    align-items: flex-end;
+  }
+
+  &-items-stretch {
+    align-items: stretch;
+  }
+
+  &-1 {
+    flex: 1 1 0%;
+  }
+
+  &-auto {
+    flex: 1 1 auto;
+  }
+
+  &-none {
+    flex: none;
+  }
+
+  &-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

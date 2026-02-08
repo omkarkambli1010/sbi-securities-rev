@@ -1,0 +1,51 @@
+@import './variables';
+
+// ============================================
+// BREAKPOINT MAP
+// ============================================
+
+$breakpoints: (
+  'xs': $breakpoint-xs,
+  'sm': $breakpoint-sm,
+  'md': $breakpoint-md,
+  'lg': $breakpoint-lg,
+  'xl': $breakpoint-xl,
+  '2xl': $breakpoint-2xl,
+);
+
+// ============================================
+// MEDIA QUERY HELPERS
+// ============================================
+
+// Min-width media query
+@mixin mq-min($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$breakpoint} not found in $breakpoints map.";
+  }
+}
+
+// Max-width media query
+@mixin mq-max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint) - 1px) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$breakpoint} not found in $breakpoints map.";
+  }
+}
+
+// Range media query
+@mixin mq-between($min-breakpoint, $max-breakpoint) {
+  @if map-has-key($breakpoints, $min-breakpoint) and map-has-key($breakpoints, $max-breakpoint) {
+    @media (min-width: map-get($breakpoints, $min-breakpoint)) and (max-width: map-get($breakpoints, $max-breakpoint) - 1px) {
+      @content;
+    }
+  } @else {
+    @warn "One or both breakpoints not found in $breakpoints map.";
+  }
+}

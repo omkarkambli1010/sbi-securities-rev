@@ -1,0 +1,39 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// ============================================
+// THEME TRANSITION
+// ============================================
+
+* {
+  @include motion-safe {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: $transition-base;
+    transition-timing-function: $ease-in-out;
+  }
+}
+
+// Prevent transition on page load
+html.no-transition * {
+  transition: none !important;
+}
+
+// ============================================
+// THEME UTILITIES
+// ============================================
+
+.light-only {
+  display: block;
+
+  [data-theme='dark'] & {
+    display: none;
+  }
+}
+
+.dark-only {
+  display: none;
+
+  [data-theme='dark'] & {
+    display: block;
+  }
+}

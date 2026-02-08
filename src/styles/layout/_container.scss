@@ -1,0 +1,79 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// ============================================
+// CONTAINER SYSTEM
+// ============================================
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-lg;
+  padding-right: $spacing-lg;
+
+  @include respond-to('sm') {
+    max-width: $container-sm;
+    padding-left: $spacing-xl;
+    padding-right: $spacing-xl;
+  }
+
+  @include respond-to('md') {
+    max-width: $container-md;
+  }
+
+  @include respond-to('lg') {
+    max-width: $container-lg;
+    padding-left: $spacing-2xl;
+    padding-right: $spacing-2xl;
+  }
+
+  @include respond-to('xl') {
+    max-width: $container-xl;
+  }
+
+  @include respond-to('2xl') {
+    max-width: $container-2xl;
+  }
+
+  // Full width container
+  &-fluid {
+    max-width: 100%;
+  }
+
+  // Narrow container
+  &-narrow {
+    max-width: $container-md;
+  }
+}
+
+// Section wrapper
+.section {
+  padding-top: $spacing-4xl;
+  padding-bottom: $spacing-4xl;
+
+  @include respond-to('md') {
+    padding-top: $spacing-5xl;
+    padding-bottom: $spacing-5xl;
+  }
+
+  &-sm {
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+
+    @include respond-to('md') {
+      padding-top: $spacing-3xl;
+      padding-bottom: $spacing-3xl;
+    }
+  }
+
+  &-lg {
+    padding-top: $spacing-5xl;
+    padding-bottom: $spacing-5xl;
+
+    @include respond-to('md') {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
+  }
+}

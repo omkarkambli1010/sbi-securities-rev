@@ -1,0 +1,70 @@
+
+@import '../../../styles/index';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 100;
+  @include transition(all, $transition-base, $ease-out);
+
+  &.scrolled {
+    @include glassmorphism(20px, 0.8, 0.2);
+    box-shadow: $shadow-md;
+  }
+}
+
+[data-theme='dark'] {
+  .header.scrolled {
+    @include glassmorphism-dark(20px, 0.8, 0.1);
+  }
+}
+
+.container {
+  @include flex-between;
+  max-width: $container-2xl;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('sm') {
+    padding: 0 $spacing-xl;
+  }
+
+  @include respond-to('lg') {
+    padding: 0 $spacing-2xl;
+  }
+}
+
+.logo {
+  @include flex-center;
+  gap: $spacing-md;
+  text-decoration: none;
+  @include transition(transform, $transition-base, $ease-out);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.logoText {
+  font-size: $text-xl;
+  font-weight: $font-bold;
+  @include text-gradient($primary, $secondary);
+
+  @include respond-to('md') {
+    font-size: $text-2xl;
+  }
+}
+
+.actions {
+  @include flex-center;
+  gap: $spacing-md;
+
+  @include respond-to('lg') {
+    gap: $spacing-xl;
+  }
+}

@@ -1,0 +1,100 @@
+
+@import '../../../styles/index';
+
+.toggle {
+  @include button-reset;
+  @include flex-center;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-full;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  @include transition(all, $transition-base, $ease-out);
+
+  &:hover {
+    background: var(--overlay-light);
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    @include focus-ring(var(--color-primary), 2px);
+  }
+}
+
+.iconWrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-foreground);
+  @include transition(all, $transition-base, $ease-out);
+
+  &.hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0);
+  }
+
+  &:not(.hidden) {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+}
+
+.sun {
+  color: $warning;
+}
+
+.moon {
+  color: $info;
+}
+
+// ============================================
+// DARK MODE
+// ============================================
+
+[data-theme='dark'] {
+  .toggle {
+    &:hover {
+      background: var(--overlay-light);
+    }
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes rotate-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0);
+  }
+}

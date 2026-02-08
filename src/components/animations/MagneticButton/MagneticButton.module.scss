@@ -1,0 +1,13 @@
+@import '../../../styles/index';
+
+.magneticButton {
+  @include button-base;
+  background: var(--color-primary);
+  color: $white;
+  will-change: transform;
+
+  &:hover {
+    background: var(--color-primary-dark);
+    box-shadow: $shadow-xl;
+  }
+}

@@ -1,0 +1,140 @@
+@import '../../../styles/index';
+
+.button {
+  @include button-base;
+  position: relative;
+  font-size: $text-base;
+  font-weight: $font-semibold;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  @include transition(all, $transition-base, $ease-out);
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    @include focus-ring(var(--color-primary), 2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ============================================
+// VARIANTS
+// ============================================
+
+.primary {
+  background: var(--color-primary);
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.secondary {
+  background: var(--color-secondary);
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background: var(--color-secondary-light);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: $white;
+    transform: translateY(-2px);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--overlay-light);
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================
+// SIZES
+// ============================================
+
+.sm {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $text-sm;
+  border-radius: $radius-md;
+}
+
+.md {
+  padding: $spacing-md $spacing-xl;
+  font-size: $text-base;
+  border-radius: $radius-lg;
+}
+
+.lg {
+  padding: $spacing-lg $spacing-2xl;
+  font-size: $text-lg;
+  border-radius: $radius-xl;
+}
+
+// ============================================
+// LOADING STATE
+// ============================================
+
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================
+// DARK MODE ADJUSTMENTS
+// ============================================
+
+[data-theme='dark'] {
+  .outline {
+    &:hover:not(:disabled) {
+      background: var(--color-primary);
+      color: $white;
+    }
+  }
+
+  .ghost {
+    &:hover:not(:disabled) {
+      background: var(--overlay-light);
+    }
+  }
+}

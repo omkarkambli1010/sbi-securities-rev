@@ -1,0 +1,224 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// ============================================
+// ANIMATION UTILITIES
+// ============================================
+
+// GSAP animation classes (will be controlled by GSAP)
+.fade-in {
+  opacity: 0;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.slide-down {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.rotate-in {
+  opacity: 0;
+  transform: rotate(-10deg);
+}
+
+// ============================================
+// CSS ANIMATIONS
+// ============================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// ============================================
+// ANIMATION UTILITY CLASSES
+// ============================================
+
+.animate-fade-in {
+  animation: fadeIn $transition-base $ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp $transition-base $ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown $transition-base $ease-out;
+}
+
+.animate-scale-up {
+  animation: scaleUp $transition-base $ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s $ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s $ease-in-out infinite;
+}
+
+// ============================================
+// TRANSITION UTILITIES
+// ============================================
+
+.transition-none {
+  transition: none !important;
+}
+
+.transition-all {
+  @include transition-all;
+}
+
+.transition-colors {
+  @include transition(color background-color border-color);
+}
+
+.transition-opacity {
+  @include transition(opacity);
+}
+
+.transition-transform {
+  @include transition(transform);
+}
+
+// ============================================
+// PARALLAX
+// ============================================
+
+.parallax {
+  will-change: transform;
+}
+
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}
+
+// ============================================
+// PERFORMANCE HINTS
+// ============================================
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+// Disable animations for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

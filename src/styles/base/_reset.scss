@@ -1,0 +1,106 @@
+// ============================================
+// MODERN CSS RESET
+// ============================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  overflow-x: hidden;
+}
+
+// Remove list styles on ul, ol elements
+ul,
+ol {
+  list-style: none;
+}
+
+// Make images easier to work with
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove default button styles
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// Remove animations and transitions for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Anchor tags
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Remove default fieldset styles
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+// Remove default legend styles
+legend {
+  padding: 0;
+}
+
+// Prevent textarea from being resized horizontally
+textarea {
+  resize: vertical;
+}
+
+// Remove default table spacing
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// Prevent horizontal overflow
+html,
+body {
+  overflow-x: hidden;
+}

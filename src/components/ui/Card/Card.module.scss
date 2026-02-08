@@ -1,0 +1,117 @@
+@import '../../../styles/index';
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-xl;
+  @include transition(all, $transition-base, $ease-out);
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+}
+
+// ============================================
+// VARIANTS
+// ============================================
+
+.default {
+  background: var(--color-surface);
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+.elevated {
+  background: var(--color-background);
+  box-shadow: $shadow-lg;
+
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-4px);
+  }
+}
+
+.glass {
+  @include glassmorphism(16px, 0.1, 0.2);
+  border: 1px solid var(--glass-border);
+
+  &:hover {
+    @include glassmorphism(20px, 0.15, 0.3);
+  }
+}
+
+[data-theme='dark'] {
+  .elevated {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .glass {
+    @include glassmorphism-dark(16px, 0.2, 0.1);
+    border: 1px solid var(--color-border);
+
+    &:hover {
+      @include glassmorphism-dark(20px, 0.25, 0.15);
+    }
+  }
+}
+
+// ============================================
+// PADDING VARIANTS
+// ============================================
+
+.padding-none {
+  padding: 0;
+}
+
+.padding-sm {
+  padding: $spacing-lg;
+}
+
+.padding-md {
+  padding: $spacing-xl;
+}
+
+.padding-lg {
+  padding: $spacing-2xl;
+}
+
+// ============================================
+// CARD PARTS
+// ============================================
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.description {
+  font-size: $text-sm;
+  color: var(--color-muted);
+  line-height: $leading-relaxed;
+  margin: 0;
+}
+
+.content {
+  padding-top: $spacing-lg;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding-top: $spacing-lg;
+  margin-top: auto;
+}

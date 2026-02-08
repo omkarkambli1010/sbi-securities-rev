@@ -1,0 +1,41 @@
+@import '../abstracts/variables';
+
+// ============================================
+// DARK THEME VARIABLES
+// ============================================
+
+[data-theme='dark'] {
+  // Brand Colors
+  --color-primary: #{$secondary};
+  --color-primary-dark: #{$primary-dark};
+  --color-primary-light: #{$secondary-light};
+  --color-secondary: #{$secondary-light};
+  --color-secondary-light: #93c5fd;
+
+  // Status Colors
+  --color-success: #{$success-light};
+  --color-danger: #{$danger-light};
+  --color-warning: #{$warning-light};
+  --color-info: #{$info-light};
+
+  // Neutral Colors
+  --color-background: #{$dark-bg};
+  --color-surface: #{$dark-surface};
+  --color-foreground: #{$dark-text};
+  --color-muted: #{$dark-text-muted};
+  --color-border: #{$dark-border};
+
+  // Shadows (adjusted for dark mode)
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+
+  // Overlays
+  --overlay-light: rgba(255, 255, 255, 0.05);
+  --overlay-dark: rgba(0, 0, 0, 0.7);
+
+  // Glassmorphism
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}

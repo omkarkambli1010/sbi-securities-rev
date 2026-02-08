@@ -1,0 +1,139 @@
+
+@import '../../../styles/index';
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menuButton {
+  @include button-reset;
+  @include flex-center;
+  padding: $spacing-sm;
+  color: var(--color-foreground);
+  @include transition(all, $transition-base, $ease-out);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 100%;
+  max-width: 300px;
+  height: calc(100vh - 80px);
+  background: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  padding: $spacing-2xl;
+  gap: $spacing-md;
+  list-style: none;
+  transform: translateX(100%);
+  @include transition(transform, $transition-slow, $ease-out);
+  z-index: 50;
+  box-shadow: $shadow-xl;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  @include respond-to('lg') {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    height: auto;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: $spacing-lg;
+    transform: translateX(0);
+    box-shadow: none;
+  }
+}
+
+.navItem {
+  width: 100%;
+
+  @include respond-to('lg') {
+    width: auto;
+  }
+}
+
+.navLink {
+  display: block;
+  position: relative;
+  padding: $spacing-md;
+  font-size: $text-base;
+  font-weight: $font-medium;
+  color: var(--color-foreground);
+  text-decoration: none;
+  border-radius: $radius-lg;
+  @include transition(all, $transition-base, $ease-out);
+
+  &:hover {
+    color: var(--color-primary);
+    background: var(--overlay-light);
+  }
+
+  &.active {
+    color: var(--color-primary);
+    background: var(--overlay-light);
+  }
+
+  @include respond-to('lg') {
+    padding: $spacing-sm $spacing-md;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transform: translateX(-50%);
+      @include transition(width, $transition-base, $ease-out);
+    }
+
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  animation: fadeIn $transition-base $ease-out;
+
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
