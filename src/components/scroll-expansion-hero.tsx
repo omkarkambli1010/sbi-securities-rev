@@ -58,20 +58,15 @@ const ScrollExpandMedia = ({
       
       if (!isInView) return;
 
-      // Allow normal scroll if media is fully expanded and user scrolls down
-      if (mediaFullyExpanded && e.deltaY > 0) {
-        return; // Allow normal page scroll
-      }
-
-      // Only prevent default when expanding/collapsing
-      if (mediaFullyExpanded && e.deltaY < 0 && scrollProgress > 0) {
+      // If media is NOT fully expanded, lock page scroll and only allow expansion
+      if (!mediaFullyExpanded) {
         e.preventDefault();
-        setScrollProgress(Math.max(scrollProgress - Math.abs(e.deltaY) * 0.0009, 0));
-        if (scrollProgress < 0.5) {
-          setMediaFullyExpanded(false);
-        }
-      } else if (!mediaFullyExpanded) {
-        e.preventDefault();
+        // Lock page to section during expansion
+        window.scrollTo({
+          top: sectionRef.current.offsetTop - window.innerHeight / 4,
+          behavior: 'auto',
+        });
+        
         const scrollDelta = e.deltaY * 0.0009;
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
@@ -84,6 +79,22 @@ const ScrollExpandMedia = ({
           setShowContent(true);
         } else if (newProgress < 0.75) {
           setShowContent(false);
+        }
+      } 
+      // If media IS fully expanded and scrolling down, allow normal page scroll
+      else if (mediaFullyExpanded && e.deltaY > 0) {
+        return; // Allow normal page scroll
+      }
+      // If media IS fully expanded and scrolling up, lock and collapse
+      else if (mediaFullyExpanded && e.deltaY < 0) {
+        e.preventDefault();
+        window.scrollTo({
+          top: sectionRef.current.offsetTop - window.innerHeight / 4,
+          behavior: 'auto',
+        });
+        setScrollProgress(Math.max(scrollProgress - Math.abs(e.deltaY) * 0.0009, 0));
+        if (scrollProgress < 0.5) {
+          setMediaFullyExpanded(false);
         }
       }
     };
@@ -136,13 +147,17 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      if (!sectionRef.current || !mediaFullyExpanded) return;
+      if (!sectionRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
       const isInView = rect.top < window.innerHeight && rect.bottom > 0;
       
+      // Lock scroll position during expansion/collapse transition
       if (isInView && !mediaFullyExpanded) {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+          top: sectionRef.current.offsetTop - window.innerHeight / 4,
+          behavior: 'auto',
+        });
       }
     };
 
