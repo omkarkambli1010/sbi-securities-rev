@@ -1,81 +1,15 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
 import { FadeIn } from '@/components/animations/FadeIn/FadeIn';
 import { MagneticButton } from '@/components/animations/MagneticButton/MagneticButton';
 import { ScrollProgress } from '@/components/animations/ScrollProgress/ScrollProgress';
+import { VideoHero } from '@/components/sections/VideoHero/VideoHero';
 import { animateCounter } from '@/lib/gsap';
 import { Blog } from '@/components/sections/Blog/Blog';
 import { TrendingUp, Zap, Shield, BarChart3, Users, Award } from 'lucide-react';
-
-function AnimatedTitle({ text }: { text: string }) {
-  const words = text.split(' ');
-
-  return (
-    <h1 className="relative" style={{ marginBottom: '2rem' }}>
-      {/* Glow layer behind the text */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 animate-hero-gradient blur-xl brightness-110"
-        style={{
-          fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-          lineHeight: 1.2,
-          fontWeight: 500,
-          letterSpacing: '-0.02em',
-          background: 'linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800, #00cfff)',
-          backgroundSize: '300% 100%',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          opacity: 0.6,
-        }}
-      >
-        {text}
-      </span>
-      {/* Visible text layer */}
-      <span className="relative">
-        {words.map((word, wordIndex) => (
-          <span
-            key={wordIndex}
-            style={{ display: 'inline-block', marginRight: '0.75rem' }}
-          >
-            {word.split('').map((letter, letterIndex) => (
-              <motion.span
-                key={`${wordIndex}-${letterIndex}`}
-                initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  delay: wordIndex * 0.1 + letterIndex * 0.03,
-                  type: 'spring',
-                  stiffness: 150,
-                  damping: 25,
-                }}
-                className="animate-hero-gradient"
-                style={{
-                  display: 'inline-block',
-                  fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-                  lineHeight: 1.2,
-                  fontWeight: 500,
-                  letterSpacing: '-0.02em',
-                  background: 'linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800, #00cfff)',
-                  backgroundSize: '300% 100%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </span>
-        ))}
-      </span>
-    </h1>
-  );
-}
 
 export default function HomePage() {
   const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -140,55 +74,12 @@ export default function HomePage() {
   return (
     <>
       <ScrollProgress />
-      {/* Hero Section */}
-      <section style={{ minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <motion.div
-          initial={{ opacity: 0.0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: 'easeInOut',
-          }}
-          className="relative z-10"
-        >
-          <div className="container">
-            <div className="flex-column-center text-center">
-              <AnimatedTitle text="Modern Investment Platform" />
-
-              <FadeIn delay={0.5}>
-                <p
-                  className="text-muted"
-                  style={{
-                    fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                    maxWidth: '700px',
-                    marginBottom: '3rem',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Experience the future of investing with our cutting-edge platform.
-                  Real-time analytics, GSAP animations, and a beautiful dark mode.
-                </p>
-              </FadeIn>
-
-              <FadeIn delay={0.7}>
-                <div className="flex gap-md" style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
-                  <MagneticButton strength={0.3}>
-                    Get Started Free
-                  </MagneticButton>
-                  <Button variant="outline" size="lg">
-                    View Demo
-                  </Button>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      {/* Video Hero Section */}
+      <VideoHero />
 
       <div className="container">
         {/* Stats Section */}
-        <section className="section-sm">
+        {/* <section className="section-sm">
           <div className="grid grid-responsive" style={{ textAlign: 'center' }}>
             {stats.map((stat, index) => (
               <FadeIn key={index} delay={index * 0.1}>
@@ -212,7 +103,7 @@ export default function HomePage() {
               </FadeIn>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Features Section */}
         <section className="section">

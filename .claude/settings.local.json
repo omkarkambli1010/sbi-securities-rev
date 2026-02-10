@@ -5,7 +5,9 @@
       "Bash(curl:*)",
       "Bash(npx next dev:*)",
       "Bash(netstat:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "WebFetch(domain:www.sbisecurities.in)",
+      "WebFetch(domain:www.figma.com)"
     ]
   }
 }

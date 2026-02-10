@@ -4,7 +4,8 @@ import { siteConfig } from '@/config/site';
 import { ThemeProvider } from '@/components/layout/ThemeProvider/ThemeProvider';
 import { Header } from '@/components/layout/Header/Header';
 import { Footerdemo } from '@/components/ui/footer-section';
-import { AuroraBackground } from '@/components/ui/aurora-background';
+import { ScrollToTop } from '@/components/animations/ScrollToTop/ScrollToTop';
+
 import './tailwind.css';
 import './globals.scss';
 
@@ -68,18 +69,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${openSans.variable} no-transition`}>
       <body className={openSans.className}>
         <ThemeProvider defaultTheme="light">
-          <AuroraBackground className="!h-auto !min-h-screen !items-start !justify-start">
-            <div className="relative z-10 w-full">
-              <a href="#main-content" className="skip-link">
-                Skip to main content
-              </a>
-              <Header />
-              <main id="main-content" style={{ paddingTop: '80px', minHeight: 'calc(100vh - 80px)' }}>
-                {children}
-              </main>
-              <Footerdemo />
-            </div>
-          </AuroraBackground>
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="pt-[64px]">
+            {children}
+          </main>
+          <Footerdemo />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
