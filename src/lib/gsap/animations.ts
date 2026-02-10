@@ -136,7 +136,7 @@ export const splitTextReveal = (element: HTMLElement, options = {}) => {
 // SCROLL ANIMATIONS
 // ============================================
 
-export const scrollFadeIn = (element: gsap.TweenTarget, triggerOptions = {}) => {
+export const scrollFadeIn = (element: gsap.DOMTarget, triggerOptions = {}) => {
   return gsap.from(element, {
     opacity: 0,
     y: 60,
@@ -160,7 +160,7 @@ export const scrollStaggerFadeIn = (elements: gsap.TweenTarget, triggerElement?:
     ease: EASING.SMOOTH,
     stagger: 0.15,
     scrollTrigger: {
-      trigger: triggerElement || elements,
+      trigger: triggerElement || (elements as gsap.DOMTarget),
       start: 'top 80%',
       toggleActions: 'play none none reverse',
       ...options,
@@ -172,7 +172,7 @@ export const scrollStaggerFadeIn = (elements: gsap.TweenTarget, triggerElement?:
 // PARALLAX
 // ============================================
 
-export const parallax = (element: gsap.TweenTarget, speed = 0.5) => {
+export const parallax = (element: gsap.DOMTarget, speed = 0.5) => {
   return gsap.to(element, {
     y: () => window.innerHeight * speed,
     ease: 'none',

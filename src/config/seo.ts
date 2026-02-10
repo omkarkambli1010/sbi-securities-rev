@@ -1,7 +1,6 @@
-import { DefaultSeo } from 'next-seo';
 import { siteConfig } from './site';
 
-export const defaultSEOConfig: Parameters<typeof DefaultSeo>[0] = {
+export const defaultSEOConfig = {
   titleTemplate: `%s | ${siteConfig.name}`,
   defaultTitle: siteConfig.name,
   description: siteConfig.description,

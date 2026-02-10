@@ -12,7 +12,7 @@ export function useGSAP(
   callback: (context: gsap.Context) => void,
   dependencies: any[] = []
 ) {
-  const contextRef = useRef<gsap.Context>();
+  const contextRef = useRef<gsap.Context>(null);
 
   useEffect(() => {
     contextRef.current = gsap.context(() => {

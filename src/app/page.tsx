@@ -1,33 +1,26 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { Button } from '@/components/ui';
+import dynamic from 'next/dynamic';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui';
 import { FadeIn } from '@/components/animations/FadeIn/FadeIn';
-import { MagneticButton } from '@/components/animations/MagneticButton/MagneticButton';
 import { ScrollProgress } from '@/components/animations/ScrollProgress/ScrollProgress';
 import { VideoHero } from '@/components/sections/VideoHero/VideoHero';
-import { animateCounter } from '@/lib/gsap';
-import { Blog } from '@/components/sections/Blog/Blog';
-import Products from '@/components/sections/Products';
 import { PixelTrail } from '@/components/ui/pixel-trail';
 import { useScreenSize } from '@/components/hooks/use-screen-size';
-import { TrendingUp, Zap, Shield, BarChart3, Users, Award } from 'lucide-react';
+import { Blog } from '@/components/sections/Blog/Blog';
+import { TrendingUp, Zap, Shield } from 'lucide-react';
+
+// Dynamic imports for below-fold heavy components
+const Products = dynamic(() => import('@/components/sections/Products'), {
+  loading: () => <div style={{ minHeight: '100vh' }} />,
+});
+const TestimonialsSection = dynamic(
+  () => import('@/components/ui/testimonials-with-marquee').then(mod => ({ default: mod.TestimonialsSection })),
+  { loading: () => <div style={{ minHeight: '400px' }} /> }
+);
 
 export default function HomePage() {
-  const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
   const screenSize = useScreenSize();
-
-  useEffect(() => {
-    statsRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const value = ref.getAttribute('data-value');
-        if (value) {
-          animateCounter(ref, parseInt(value), { delay: index * 0.1 });
-        }
-      }
-    });
-  }, []);
 
   const features = [
     {
@@ -47,34 +40,6 @@ export default function HomePage() {
     },
   ];
 
-  const products = [
-    {
-      icon: <BarChart3 size={40} />,
-      title: 'Trading Platform',
-      description: 'Advanced trading tools with real-time market data and analytics.',
-      features: ['Live Market Data', 'Advanced Charts', 'Order Management'],
-    },
-    {
-      icon: <Users size={40} />,
-      title: 'Portfolio Management',
-      description: 'Track and manage your investments with powerful portfolio tools.',
-      features: ['Asset Allocation', 'Performance Tracking', 'Risk Analysis'],
-    },
-    {
-      icon: <Award size={40} />,
-      title: 'Premium Research',
-      description: 'Access expert market research and investment recommendations.',
-      features: ['Market Insights', 'Stock Reports', 'Expert Analysis'],
-    },
-  ];
-
-  const stats = [
-    { value: 10000, label: 'Active Users', suffix: '+' },
-    { value: 500, label: 'Companies Listed', suffix: '+' },
-    { value: 99, label: 'Uptime', suffix: '%' },
-    { value: 24, label: 'Support', suffix: '/7' },
-  ];
-
   return (
     <>
       <ScrollProgress />
@@ -82,33 +47,6 @@ export default function HomePage() {
       <VideoHero />
 
       <div className="container">
-        {/* Stats Section */}
-        {/* <section className="section-sm">
-          <div className="grid grid-responsive" style={{ textAlign: 'center' }}>
-            {stats.map((stat, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div>
-                  <div
-                    ref={(el) => {
-                      if (el) statsRefs.current[index] = el;
-                    }}
-                    data-value={stat.value}
-                    className="text-gradient"
-                    style={{
-                      fontSize: 'clamp(2rem, 5vw, 3rem)',
-                      fontWeight: 'bold',
-                      marginBottom: '0.5rem',
-                    }}
-                  >
-                    0{stat.suffix}
-                  </div>
-                  <div className="text-muted">{stat.label}</div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </section> */}
-
         {/* Features Section */}
         <section className="section relative">
           <div className="absolute inset-0 z-0">
@@ -149,36 +87,56 @@ export default function HomePage() {
       {/* Products Section with Scroll Expansion - Full Width */}
       <Products />
 
+      {/* Testimonials Section */}
+      <TestimonialsSection
+        title="What Our Investors Say"
+        description="Trusted by thousands of investors across India for seamless trading and investment solutions"
+        testimonials={[
+          {
+            author: {
+              name: "Rajesh Sharma",
+              handle: "@rajesh_trades",
+              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "SBI Securities has made stock trading so simple. The research reports and real-time analytics have helped me make better investment decisions.",
+          },
+          {
+            author: {
+              name: "Priya Mehta",
+              handle: "@priya_invests",
+              avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "The IPO application process is seamless. I've successfully invested in multiple IPOs through their platform without any hassle.",
+          },
+          {
+            author: {
+              name: "Amit Patel",
+              handle: "@amit_wealth",
+              avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Best platform for mutual fund investments. The SIP calculator and portfolio tracking tools are incredibly useful for long-term planning.",
+          },
+          {
+            author: {
+              name: "Sneha Gupta",
+              handle: "@sneha_fin",
+              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "As an NRI, managing my investments in India was always a challenge. SBI Securities NRI zone made it effortless with great customer support.",
+          },
+          {
+            author: {
+              name: "Vikram Singh",
+              handle: "@vikram_equity",
+              avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "The derivatives trading tools are top-notch. Real-time data, quick execution, and the margin trading facility gives me the edge I need.",
+          },
+        ]}
+      />
+
       {/* Blog Section */}
       <Blog />
-
-      {/* CTA Section */}
-      <div className="container section relative">
-        <div className="absolute inset-0 z-0">
-          <PixelTrail
-            pixelSize={screenSize.lessThan(`md`) ? 50 : 80}
-            fadeDuration={300}
-            delay={1000}
-            pixelClassName="rounded-full bg-green-400/40"
-          />
-        </div>
-        <FadeIn>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-            Ready to Get Started?
-          </h2>
-          <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 2rem', position: 'relative', zIndex: 10 }}>
-            Join thousands of investors who trust our platform for their trading needs
-          </p>
-          <div className="flex gap-md" style={{ justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
-            <MagneticButton strength={0.3}>
-              Create Free Account
-            </MagneticButton>
-            <Button variant="ghost" size="lg">
-              Contact Sales
-            </Button>
-          </div>
-        </FadeIn>
-      </div>
     </>
   );
 }

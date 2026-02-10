@@ -57,9 +57,13 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+  		maxWidth: {
+  			container: '1280px',
+  		},
   		animation: {
   			aurora: 'aurora 60s linear infinite',
-  			'hero-gradient': 'hero-gradient 12s linear infinite'
+  			'hero-gradient': 'hero-gradient 12s linear infinite',
+  			marquee: 'marquee var(--duration) linear infinite',
   		},
   		keyframes: {
   			aurora: {
@@ -80,6 +84,10 @@ module.exports = {
   				'100%': {
   					backgroundPosition: '0% 50%'
   				}
+  			},
+  			marquee: {
+  				from: { transform: 'translateX(0)' },
+  				to: { transform: 'translateX(calc(-100% - var(--gap)))' }
   			}
   		}
   	}

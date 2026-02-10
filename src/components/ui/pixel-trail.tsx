@@ -1,16 +1,13 @@
 'use client'
 
-import React, { useCallback, useMemo, useRef } from "react"
-import { motion, useAnimationControls } from "framer-motion"
-import { v4 as uuidv4 } from "uuid"
-
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { useDimensions } from "@/components/hooks/use-debounced-dimensions"
 
 interface PixelTrailProps {
-  pixelSize: number // px
-  fadeDuration?: number // ms
-  delay?: number // ms
+  pixelSize: number
+  fadeDuration?: number
+  delay?: number
   className?: string
   pixelClassName?: string
 }
@@ -22,9 +19,23 @@ const PixelTrail: React.FC<PixelTrailProps> = ({
   className,
   pixelClassName,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null!)
+  const [isVisible, setIsVisible] = useState(false)
   const dimensions = useDimensions(containerRef)
-  const trailId = useRef(uuidv4())
+  const trailId = useRef(`pt-${Math.random().toString(36).slice(2, 8)}`)
+
+  // Only render pixels when container is in viewport
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: '100px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -38,11 +49,15 @@ const PixelTrail: React.FC<PixelTrailProps> = ({
         `${trailId.current}-pixel-${x}-${y}`
       )
       if (pixelElement) {
-        const animatePixel = (pixelElement as any).__animatePixel
-        if (animatePixel) animatePixel()
+        pixelElement.style.opacity = '1'
+        pixelElement.style.transition = 'none'
+        // Force reflow then fade out
+        void pixelElement.offsetWidth
+        pixelElement.style.transition = `opacity ${fadeDuration}ms ease ${delay}ms`
+        pixelElement.style.opacity = '0'
       }
     },
-    [pixelSize]
+    [pixelSize, fadeDuration, delay]
   )
 
   const columns = useMemo(
@@ -63,16 +78,18 @@ const PixelTrail: React.FC<PixelTrailProps> = ({
       )}
       onMouseMove={handleMouseMove}
     >
-      {Array.from({ length: rows }).map((_, rowIndex) => (
+      {isVisible && columns > 0 && rows > 0 && Array.from({ length: rows }).map((_, rowIndex) => (
         <div key={rowIndex} className="flex">
           {Array.from({ length: columns }).map((_, colIndex) => (
-            <PixelDot
+            <div
               key={`${colIndex}-${rowIndex}`}
               id={`${trailId.current}-pixel-${colIndex}-${rowIndex}`}
-              size={pixelSize}
-              fadeDuration={fadeDuration}
-              delay={delay}
-              className={pixelClassName}
+              className={cn("cursor-pointer-none", pixelClassName)}
+              style={{
+                width: `${pixelSize}px`,
+                height: `${pixelSize}px`,
+                opacity: 0,
+              }}
             />
           ))}
         </div>
@@ -81,51 +98,4 @@ const PixelTrail: React.FC<PixelTrailProps> = ({
   )
 }
 
-interface PixelDotProps {
-  id: string
-  size: number
-  fadeDuration: number
-  delay: number
-  className?: string
-}
-
-const PixelDot: React.FC<PixelDotProps> = React.memo(
-  ({ id, size, fadeDuration, delay, className }) => {
-    const controls = useAnimationControls()
-
-    const animatePixel = useCallback(() => {
-      controls.start({
-        opacity: [1, 0],
-        transition: { duration: fadeDuration / 1000, delay: delay / 1000 },
-      })
-    }, [])
-
-    // Attach the animatePixel function to the DOM element
-    const ref = useCallback(
-      (node: HTMLDivElement | null) => {
-        if (node) {
-          ;(node as any).__animatePixel = animatePixel
-        }
-      },
-      [animatePixel]
-    )
-
-    return (
-      <motion.div
-        id={id}
-        ref={ref}
-        className={cn("cursor-pointer-none", className)}
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-        }}
-        initial={{ opacity: 0 }}
-        animate={controls}
-        exit={{ opacity: 0 }}
-      />
-    )
-  }
-)
-
-PixelDot.displayName = "PixelDot"
 export { PixelTrail }

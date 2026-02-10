@@ -115,6 +115,7 @@ export function Blog() {
           ))}
         </div>
       </div>
+      </div>
     </section>
   );
 }
