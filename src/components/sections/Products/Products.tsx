@@ -1,0 +1,67 @@
+'use client';
+
+import React from 'react';
+import ScrollExpandMedia from '../../scroll-expansion-hero';
+import Image from 'next/image';
+
+const products = [
+  {
+    id: 'p1',
+    title: 'Equity Funds',
+    description: 'Diversified equity portfolios for long-term growth.',
+    image: '/images/products/equity.jpg',
+  },
+  {
+    id: 'p2',
+    title: 'Debt Funds',
+    description: 'Stable income with lower volatility.',
+    image: '/images/products/debt.jpg',
+  },
+  {
+    id: 'p3',
+    title: 'Mutual Plans',
+    description: 'Curated plans to match different risk profiles.',
+    image: '/images/products/mutual.jpg',
+  },
+];
+
+const Products: React.FC = () => {
+  return (
+    <ScrollExpandMedia
+      mediaType="image"
+      mediaSrc={products[0].image}
+      bgImageSrc={products[0].image}
+      title={'Our Products'}
+      scrollToExpand={'Scroll to explore our products'}
+      textBlend={false}
+    >
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        {products.map((p) => (
+          <article
+            key={p.id}
+            className="relative rounded-xl overflow-hidden bg-white/5 p-6 shadow-lg"
+          >
+            <div className="w-full h-48 relative mb-4 rounded-md overflow-hidden">
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+
+            <h3 className="text-xl font-semibold mb-2">{p.title}</h3>
+            <p className="text-sm text-muted-foreground">{p.description}</p>
+
+            <button className="mt-4 inline-block rounded-md bg-blue-600 px-4 py-2 text-white">
+              Learn more
+            </button>
+          </article>
+        ))}
+      </div>
+    </ScrollExpandMedia>
+  );
+};
+
+export default Products;
