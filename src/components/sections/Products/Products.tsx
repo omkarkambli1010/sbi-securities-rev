@@ -16,8 +16,8 @@ const Products: React.FC = () => {
       </div>
       <ScrollExpandMedia
         mediaType="image"
-        mediaSrc="https://pixabay.com/get/g1816ab37c3d210b0a99bde4d9bc7c30d0c9a0e27a2d0d1e43dc5ef53c1f9f0f3_1280.jpg"
-        bgImageSrc="https://pixabay.com/get/g1816ab37c3d210b0a99bde4d9bc7c30d0c9a0e27a2d0d1e43dc5ef53c1f9f0f3_1280.jpg"
+        mediaSrc="https://images.pixabay.com/download/1905225_640.jpg"
+        bgImageSrc="https://images.pixabay.com/download/1905225_1280.jpg"
         title="Stock Market"
         date="2026"
         scrollToExpand="Scroll to expand"
