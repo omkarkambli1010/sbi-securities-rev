@@ -9,19 +9,19 @@ const products = [
     id: 'p1',
     title: 'Equity Funds',
     description: 'Diversified equity portfolios for long-term growth.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
   },
   {
     id: 'p2',
     title: 'Debt Funds',
     description: 'Stable income with lower volatility.',
-    image: 'https://images.unsplash.com/photo-1611974474885-c5e5f47f6862?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
   },
   {
     id: 'p3',
     title: 'Mutual Plans',
     description: 'Curated plans to match different risk profiles.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40',
   },
 ];
 
@@ -29,8 +29,8 @@ const Products: React.FC = () => {
   return (
     <ScrollExpandMedia
       mediaType="image"
-      mediaSrc="https://images.unsplash.com/photo-1611974474885-c5e5f47f6862?w=1280&h=720&fit=crop"
-      bgImageSrc="https://images.unsplash.com/photo-1611974474885-c5e5f47f6862?w=1920&h=1080&fit=crop"
+      mediaSrc="https://images.unsplash.com/photo-1605100804763-247f67b3557e"
+      bgImageSrc="https://images.unsplash.com/photo-1605100804763-247f67b3557e"
       title={'Our Products'}
       scrollToExpand={'Scroll to explore our products'}
       textBlend={false}
