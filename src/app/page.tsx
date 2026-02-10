@@ -9,6 +9,7 @@ import { ScrollProgress } from '@/components/animations/ScrollProgress/ScrollPro
 import { VideoHero } from '@/components/sections/VideoHero/VideoHero';
 import { animateCounter } from '@/lib/gsap';
 import { Blog } from '@/components/sections/Blog/Blog';
+import Products from '@/components/sections/Products';
 import { TrendingUp, Zap, Shield, BarChart3, Users, Award } from 'lucide-react';
 
 export default function HomePage() {
@@ -133,56 +134,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Products Section */}
-        <section className="section">
-          <FadeIn>
-            <h2
-              className="text-center"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem' }}
-            >
-              Our Products
-            </h2>
-            <p
-              className="text-center text-muted"
-              style={{ maxWidth: '600px', margin: '0 auto 3rem' }}
-            >
-              Comprehensive suite of investment tools designed for modern traders
-            </p>
-          </FadeIn>
-
-          <div className="grid grid-responsive">
-            {products.map((product, index) => (
-              <FadeIn key={index} delay={index * 0.15}>
-                <Card variant="glass" padding="lg">
-                  <div style={{ marginBottom: '1.5rem', color: 'var(--color-primary)' }}>
-                    {product.icon}
-                  </div>
-                  <CardHeader>
-                    <CardTitle>{product.title}</CardTitle>
-                    <CardDescription>{product.description}</CardDescription>
-                  </CardHeader>
-                  <div style={{ marginTop: '1.5rem' }}>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                      {product.features.map((feature, i) => (
-                        <li
-                          key={i}
-                          style={{
-                            padding: '0.5rem 0',
-                            borderBottom: i < product.features.length - 1 ? '1px solid var(--color-border)' : 'none',
-                            fontSize: '0.875rem',
-                            color: 'var(--color-muted)',
-                          }}
-                        >
-                          ✓ {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Card>
-              </FadeIn>
-            ))}
-          </div>
-        </section>
+        {/* Products Section with Scroll Expansion */}
+        <Products />
       </div>
 
       {/* Blog Section */}
