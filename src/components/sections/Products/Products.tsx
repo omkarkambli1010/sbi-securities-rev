@@ -5,14 +5,24 @@ import ScrollExpandMedia from '../../scroll-expansion-hero';
 
 const Products: React.FC = () => {
   return (
-    <ScrollExpandMedia
-      mediaType="image"
-      mediaSrc="https://images.unsplash.com/photo-1642614532173-0aca6d4ce560"
-      bgImageSrc="https://images.unsplash.com/photo-1642614532173-0aca6d4ce560"
-      title="Stock Market"
-      date="2026"
-      scrollToExpand="Scroll to expand"
-    />
+    <>
+      <div className="container section" style={{ textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem' }}>
+          Our Products
+        </h2>
+        <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>
+          Explore our comprehensive investment solutions with interactive experience
+        </p>
+      </div>
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="https://cdn.pixabay.com/photo/2021/02/08/11/21/man-5994202_1280.jpg"
+        bgImageSrc="https://cdn.pixabay.com/photo/2021/02/08/11/21/man-5994202_1280.jpg"
+        title="Stock Market"
+        date="2026"
+        scrollToExpand="Scroll to expand"
+      />
+    </>
   );
 };
 

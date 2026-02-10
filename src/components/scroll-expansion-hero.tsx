@@ -58,9 +58,18 @@ const ScrollExpandMedia = ({
       
       if (!isInView) return;
 
-      if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
-        setMediaFullyExpanded(false);
+      // Allow normal scroll if media is fully expanded and user scrolls down
+      if (mediaFullyExpanded && e.deltaY > 0) {
+        return; // Allow normal page scroll
+      }
+
+      // Only prevent default when expanding/collapsing
+      if (mediaFullyExpanded && e.deltaY < 0 && scrollProgress > 0) {
         e.preventDefault();
+        setScrollProgress(Math.max(scrollProgress - Math.abs(e.deltaY) * 0.0009, 0));
+        if (scrollProgress < 0.5) {
+          setMediaFullyExpanded(false);
+        }
       } else if (!mediaFullyExpanded) {
         e.preventDefault();
         const scrollDelta = e.deltaY * 0.0009;
