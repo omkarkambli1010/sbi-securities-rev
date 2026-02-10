@@ -2,15 +2,27 @@
 
 import React from 'react';
 import ScrollExpandMedia from '../../scroll-expansion-hero';
+import { PixelTrail } from '@/components/ui/pixel-trail';
+import { useScreenSize } from '@/components/hooks/use-screen-size';
 
 const Products: React.FC = () => {
+  const screenSize = useScreenSize();
+
   return (
     <>
-      <div className="container section" style={{ textAlign: 'center' }}>
-        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem' }}>
+      <div className="container section relative">
+        <div className="absolute inset-0 z-0">
+          <PixelTrail
+            pixelSize={screenSize.lessThan(`md`) ? 45 : 70}
+            fadeDuration={250}
+            delay={900}
+            pixelClassName="rounded-full bg-purple-400/40"
+          />
+        </div>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem', textAlign: 'center', position: 'relative', zIndex: 10 }}>
           Our Products
         </h2>
-        <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>
+        <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 3rem', position: 'relative', zIndex: 10 }}>
           Explore our comprehensive investment solutions with interactive experience
         </p>
       </div>
