@@ -50,6 +50,14 @@ const ScrollExpandMedia = ({
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Only intercept scroll if component is in view
+      if (!sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInView) return;
+
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
         setMediaFullyExpanded(false);
         e.preventDefault();
@@ -72,11 +80,20 @@ const ScrollExpandMedia = ({
     };
 
     const handleTouchStart = (e: TouchEvent) => {
-      setTouchStartY(e.touches[0].clientY);
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (isInView) {
+        setTouchStartY(e.touches[0].clientY);
+      }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!touchStartY) return;
+      if (!touchStartY || !sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!isInView) return;
 
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
@@ -86,8 +103,7 @@ const ScrollExpandMedia = ({
         e.preventDefault();
       } else if (!mediaFullyExpanded) {
         e.preventDefault();
-        // Increase sensitivity for mobile, especially when scrolling back
-        const scrollFactor = deltaY < 0 ? 0.008 : 0.005; // Higher sensitivity for scrolling back
+        const scrollFactor = deltaY < 0 ? 0.008 : 0.005;
         const scrollDelta = deltaY * scrollFactor;
         const newProgress = Math.min(
           Math.max(scrollProgress + scrollDelta, 0),
@@ -111,7 +127,12 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      if (!mediaFullyExpanded) {
+      if (!sectionRef.current || !mediaFullyExpanded) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInView && !mediaFullyExpanded) {
         window.scrollTo(0, 0);
       }
     };

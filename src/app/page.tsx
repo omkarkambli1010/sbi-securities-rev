@@ -133,10 +133,10 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-
-        {/* Products Section with Scroll Expansion */}
-        <Products />
       </div>
+
+      {/* Products Section with Scroll Expansion - Full Width */}
+      <Products />
 
       {/* Blog Section */}
       <Blog />
