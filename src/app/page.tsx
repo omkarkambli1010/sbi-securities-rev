@@ -10,10 +10,13 @@ import { VideoHero } from '@/components/sections/VideoHero/VideoHero';
 import { animateCounter } from '@/lib/gsap';
 import { Blog } from '@/components/sections/Blog/Blog';
 import Products from '@/components/sections/Products';
+import { PixelTrail } from '@/components/ui/pixel-trail';
+import { useScreenSize } from '@/components/hooks/use-screen-size';
 import { TrendingUp, Zap, Shield, BarChart3, Users, Award } from 'lucide-react';
 
 export default function HomePage() {
   const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const screenSize = useScreenSize();
 
   useEffect(() => {
     statsRefs.current.forEach((ref, index) => {
@@ -107,17 +110,25 @@ export default function HomePage() {
         </section> */}
 
         {/* Features Section */}
-        <section className="section">
+        <section className="section relative">
+          <div className="absolute inset-0 z-0">
+            <PixelTrail
+              pixelSize={screenSize.lessThan(`md`) ? 40 : 60}
+              fadeDuration={200}
+              delay={800}
+              pixelClassName="rounded-full bg-blue-400/40"
+            />
+          </div>
           <FadeIn>
             <h2
-              className="text-center"
+              className="text-center relative z-10"
               style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '3rem' }}
             >
               Why Choose Us
             </h2>
           </FadeIn>
 
-          <div className="grid grid-responsive">
+          <div className="grid grid-responsive relative z-10">
             {features.map((feature, index) => (
               <FadeIn key={index} delay={index * 0.15}>
                 <Card variant="elevated" padding="lg">
@@ -142,15 +153,23 @@ export default function HomePage() {
       <Blog />
 
       {/* CTA Section */}
-      <div className="container section" style={{ textAlign: 'center' }}>
+      <div className="container section relative">
+        <div className="absolute inset-0 z-0">
+          <PixelTrail
+            pixelSize={screenSize.lessThan(`md`) ? 50 : 80}
+            fadeDuration={300}
+            delay={1000}
+            pixelClassName="rounded-full bg-green-400/40"
+          />
+        </div>
         <FadeIn>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1rem', textAlign: 'center', position: 'relative', zIndex: 10 }}>
             Ready to Get Started?
           </h2>
-          <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 2rem' }}>
+          <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto 2rem', position: 'relative', zIndex: 10 }}>
             Join thousands of investors who trust our platform for their trading needs
           </p>
-          <div className="flex gap-md" style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="flex gap-md" style={{ justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
             <MagneticButton strength={0.3}>
               Create Free Account
             </MagneticButton>
