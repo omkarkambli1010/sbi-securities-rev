@@ -10,6 +10,7 @@ import {
 } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Lenis from 'lenis';
 
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
@@ -41,6 +42,34 @@ const ScrollExpandMedia = ({
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
+
+  // Initialize Lenis
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    lenisRef.current = lenis;
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     setScrollProgress(0);
@@ -51,21 +80,17 @@ const ScrollExpandMedia = ({
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       // Only intercept scroll if component is in view
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !lenisRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
       const isInView = rect.top < window.innerHeight && rect.bottom > 0;
       
       if (!isInView) return;
 
-      // If media is NOT fully expanded, lock page scroll and only allow expansion
+      // If media is NOT fully expanded, lock Lenis and only allow expansion
       if (!mediaFullyExpanded) {
         e.preventDefault();
-        // Lock page to section during expansion
-        window.scrollTo({
-          top: sectionRef.current.offsetTop - window.innerHeight / 4,
-          behavior: 'auto',
-        });
+        lenisRef.current.stop();
         
         const scrollDelta = e.deltaY * 0.0009;
         const newProgress = Math.min(
@@ -81,17 +106,15 @@ const ScrollExpandMedia = ({
           setShowContent(false);
         }
       } 
-      // If media IS fully expanded and scrolling down, allow normal page scroll
+      // If media IS fully expanded and scrolling down, allow Lenis to scroll
       else if (mediaFullyExpanded && e.deltaY > 0) {
-        return; // Allow normal page scroll
+        lenisRef.current.start();
+        return;
       }
       // If media IS fully expanded and scrolling up, lock and collapse
       else if (mediaFullyExpanded && e.deltaY < 0) {
         e.preventDefault();
-        window.scrollTo({
-          top: sectionRef.current.offsetTop - window.innerHeight / 4,
-          behavior: 'auto',
-        });
+        lenisRef.current.stop();
         setScrollProgress(Math.max(scrollProgress - Math.abs(e.deltaY) * 0.0009, 0));
         if (scrollProgress < 0.5) {
           setMediaFullyExpanded(false);
@@ -147,17 +170,14 @@ const ScrollExpandMedia = ({
     };
 
     const handleScroll = (): void => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !lenisRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
       const isInView = rect.top < window.innerHeight && rect.bottom > 0;
       
-      // Lock scroll position during expansion/collapse transition
+      // Lock Lenis during expansion/collapse transition
       if (isInView && !mediaFullyExpanded) {
-        window.scrollTo({
-          top: sectionRef.current.offsetTop - window.innerHeight / 4,
-          behavior: 'auto',
-        });
+        lenisRef.current.stop();
       }
     };
 
