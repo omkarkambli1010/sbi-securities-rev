@@ -3,6 +3,8 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { FadeIn } from '@/components/animations/FadeIn/FadeIn';
+import { PixelTrail } from '@/components/ui/pixel-trail';
+import { useScreenSize } from '@/components/hooks/use-screen-size';
 import styles from './Blog.module.scss';
 
 interface BlogPost {
@@ -48,9 +50,20 @@ const blogPosts: BlogPost[] = [
 ];
 
 export function Blog() {
+  const screenSize = useScreenSize();
+
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <div className={styles.container} style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <PixelTrail
+            pixelSize={screenSize.lessThan(`md`) ? 36 : 56}
+            fadeDuration={220}
+            delay={700}
+            pixelClassName="rounded-full bg-yellow-400/30"
+          />
+        </div>
+        <div style={{ position: 'relative', zIndex: 10 }}>
         <FadeIn>
           <div className={styles.header}>
             <span className={styles.badge}>From Our Blog</span>

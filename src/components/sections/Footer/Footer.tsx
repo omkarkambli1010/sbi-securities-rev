@@ -3,10 +3,13 @@ import Link from 'next/link';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import { APP_NAME } from '@/lib/constants';
 import { NAV_LINKS } from '@/lib/constants';
+import { PixelTrail } from '@/components/ui/pixel-trail';
+import { useScreenSize } from '@/components/hooks/use-screen-size';
 import styles from './Footer.module.scss';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const screenSize = useScreenSize();
 
   const socialLinks = [
     {
@@ -33,7 +36,16 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.container}>
+      <div className={styles.container} style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <PixelTrail
+            pixelSize={screenSize.lessThan(`md`) ? 28 : 44}
+            fadeDuration={180}
+            delay={500}
+            pixelClassName="rounded-full bg-slate-400/20"
+          />
+        </div>
+        <div style={{ position: 'relative', zIndex: 10 }}>
         <div className={styles.grid}>
           {/* Brand Section */}
           <div className={styles.brand}>
@@ -102,6 +114,7 @@ export function Footer() {
           <p className={styles.built}>
             Built with <span className={styles.heart}>❤️</span> using Next.js, GSAP & SCSS
           </p>
+        </div>
         </div>
       </div>
     </footer>
