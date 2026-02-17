@@ -1,0 +1,86 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $nri-bg-light;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.subtitle {
+  font-size: $text-xl;
+  color: $nri-indigo;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto $spacing-2xl;
+  line-height: $leading-relaxed;
+
+  @include mobile-only {
+    font-size: $text-base;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contactCard {
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $spacing-2xl;
+  box-shadow: $shadow-sm;
+  text-align: center;
+  @include transition(all);
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-full;
+  background: rgba($nri-indigo, 0.06);
+  @include flex-center;
+  margin: 0 auto $spacing-lg;
+  color: $nri-indigo;
+}
+
+.contactTitle {
+  font-size: $text-xl;
+  font-weight: $font-semibold;
+  color: $nri-indigo;
+  margin-bottom: $spacing-sm;
+}
+
+.contactDetail {
+  font-size: $text-base;
+  color: $nri-text-gray;
+  line-height: $leading-relaxed;
+  word-break: break-word;
+}

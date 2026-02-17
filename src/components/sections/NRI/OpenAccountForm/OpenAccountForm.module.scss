@@ -1,0 +1,168 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $nri-indigo;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $white;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.subtitle {
+  font-size: $text-xl;
+  color: rgba($white, 0.85);
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+
+  @include mobile-only {
+    font-size: $text-base;
+  }
+}
+
+.form {
+  border: 1px solid rgba($white, 0.25);
+  border-radius: $radius-xl;
+  padding: $spacing-2xl;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @include mobile-only {
+    padding: $spacing-lg;
+  }
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.formRowTwo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.formLabel {
+  font-size: $text-base;
+  font-weight: $font-bold;
+  color: $white;
+
+  .required {
+    color: $nri-magenta;
+  }
+}
+
+.formInput,
+.formSelect {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border: none;
+  border-radius: $radius-lg;
+  font-size: $text-base;
+  font-family: $font-sans;
+  background: $white;
+  color: $gray-900;
+  @include transition(box-shadow);
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($white, 0.3);
+  }
+
+  &::placeholder {
+    color: $gray-400;
+  }
+}
+
+.mobileRow {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.codeSelect {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  font-size: $text-xs;
+  color: $white;
+  cursor: pointer;
+  margin-bottom: $spacing-lg;
+  line-height: $leading-relaxed;
+
+  input[type='checkbox'] {
+    margin-top: 3px;
+    accent-color: $nri-magenta;
+    flex-shrink: 0;
+  }
+
+  a {
+    color: $white;
+    text-decoration: underline;
+  }
+}
+
+.submitWrapper {
+  text-align: center;
+}
+
+.submitButton {
+  @include button-base;
+  padding: $spacing-md $spacing-3xl;
+  background: $nri-magenta;
+  color: $white;
+  border: none;
+  border-radius: $radius-lg;
+  font-size: $text-2xl;
+  font-weight: $font-semibold;
+  cursor: pointer;
+  min-width: 240px;
+
+  &:hover {
+    background: $nri-magenta-light;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba($nri-magenta, 0.4);
+  }
+
+  @include mobile-only {
+    width: 100%;
+    font-size: $text-lg;
+  }
+}

@@ -1,0 +1,85 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $nri-bg-light;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.docItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  background: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+  @include transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.docIcon {
+  flex-shrink: 0;
+  color: $nri-indigo;
+  margin-top: 2px;
+}
+
+.docText {
+  font-size: $text-base;
+  color: $nri-text-dark;
+  line-height: $leading-relaxed;
+}
+
+.ctaWrapper {
+  text-align: center;
+  margin-top: $spacing-2xl;
+}
+
+.ctaButton {
+  @include button-base;
+  padding: $spacing-md $spacing-2xl;
+  background: $nri-magenta;
+  color: $white;
+  border: none;
+  border-radius: $radius-full;
+  font-size: $text-lg;
+  font-weight: $font-semibold;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($nri-magenta, 8%);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}

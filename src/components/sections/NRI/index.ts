@@ -1,0 +1,10 @@
+export { NRIHero } from './NRIHero/NRIHero';
+export { TrustedGateway } from './TrustedGateway/TrustedGateway';
+export { WhyNRI } from './WhyNRI/WhyNRI';
+export { AccountProcess } from './AccountProcess/AccountProcess';
+export { QuickGuide } from './QuickGuide/QuickGuide';
+export { DocumentsRequired } from './DocumentsRequired/DocumentsRequired';
+export { ChargesTable } from './ChargesTable/ChargesTable';
+export { OpenAccountForm } from './OpenAccountForm/OpenAccountForm';
+export { ContactUs } from './ContactUs/ContactUs';
+export { FAQs } from './FAQs/FAQs';

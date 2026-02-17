@@ -1,0 +1,88 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $white;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.item {
+  border: 1px solid $gray-200;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  @include transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-sm;
+  }
+}
+
+.trigger {
+  @include button-reset;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-lg $spacing-xl;
+  font-size: $text-sm;
+  font-weight: $font-semibold;
+  color: $nri-indigo;
+  text-align: left;
+  cursor: pointer;
+  @include transition(background);
+
+  &:hover {
+    background: rgba($nri-indigo, 0.02);
+  }
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: $gray-500;
+  @include transition(transform);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  @include transition(max-height, $transition-base, $ease-in-out);
+}
+
+.contentOpen {
+  max-height: 300px;
+}
+
+.answer {
+  padding: 0 $spacing-xl $spacing-lg;
+  font-size: $text-sm;
+  color: $nri-text-gray;
+  line-height: $leading-relaxed;
+}

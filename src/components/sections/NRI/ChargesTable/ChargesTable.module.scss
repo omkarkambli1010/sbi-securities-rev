@@ -1,0 +1,78 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $white;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-xl, 3vw, $text-3xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+  @include custom-scrollbar(6px, $gray-100, $gray-400);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+
+  th {
+    background: $nri-indigo;
+    color: $white;
+    padding: $spacing-md $spacing-lg;
+    font-weight: $font-semibold;
+    font-size: $text-sm;
+    text-align: center;
+    white-space: nowrap;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  td {
+    padding: $spacing-md $spacing-lg;
+    font-size: $text-sm;
+    text-align: center;
+    color: $nri-text-dark;
+    border-bottom: 1px solid $gray-200;
+    white-space: pre-line;
+    line-height: $leading-relaxed;
+    font-weight: $font-semibold;
+
+    &:first-child {
+      text-align: left;
+      font-weight: $font-normal;
+      color: $nri-text-dark;
+    }
+  }
+}
+
+.evenRow {
+  background: $white;
+}
+
+.oddRow {
+  background: $gray-100;
+}

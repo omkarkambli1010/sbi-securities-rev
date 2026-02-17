@@ -1,0 +1,71 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $white;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  text-align: center;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  margin-bottom: $spacing-lg;
+}
+
+.description {
+  font-size: $text-lg;
+  color: $nri-text-gray;
+  max-width: 900px;
+  margin: 0 auto $spacing-2xl;
+  line-height: $leading-relaxed;
+}
+
+.videoWrapper {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+  cursor: pointer;
+
+  &:hover .playButton {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.playButton {
+  @include absolute-center;
+  width: 64px;
+  height: 64px;
+  border-radius: $radius-full;
+  background: rgba($nri-indigo, 0.85);
+  color: $white;
+  border: none;
+  cursor: pointer;
+  @include flex-center;
+  @include transition(transform);
+  z-index: 1;
+
+  svg {
+    margin-left: 3px;
+  }
+}

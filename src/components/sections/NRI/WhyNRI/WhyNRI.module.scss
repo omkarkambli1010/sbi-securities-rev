@@ -1,0 +1,76 @@
+@import '../../../../styles/index';
+@import '../../../../styles/abstracts/nri-variables';
+
+.section {
+  padding: $spacing-4xl 0;
+  background: $nri-bg-gray;
+}
+
+.container {
+  max-width: $container-2xl;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.heading {
+  font-size: clamp($text-2xl, 3vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $nri-indigo;
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('lg') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.featureCard {
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+  @include transition(all);
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-lg;
+  background: rgba($nri-indigo, 0.08);
+  @include flex-center;
+  margin-bottom: $spacing-md;
+  color: $nri-indigo;
+}
+
+.featureTitle {
+  font-size: $text-xl;
+  font-weight: $font-semibold;
+  color: $nri-indigo;
+  margin-bottom: $spacing-sm;
+  line-height: $leading-snug;
+}
+
+.featureDescription {
+  font-size: $text-base;
+  color: $nri-text-gray;
+  line-height: $leading-relaxed;
+}

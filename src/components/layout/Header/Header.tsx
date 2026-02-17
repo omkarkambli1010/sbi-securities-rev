@@ -39,7 +39,7 @@ const NAV_ITEMS: NavItem[] = [
         ],
       },
       { label: 'Mutual Fund', href: '/products/mutual-funds' },
-      { label: 'NRI Zone', href: '/open-nri-investment-account' },
+      { label: 'NRI Zone', href: '/nri' },
       { label: 'Home Loan', href: '/products/home-loan' },
       { label: 'Car Loan', href: '/products/car-loan' },
       { label: 'Education Loan', href: '/products/education-loan' },
