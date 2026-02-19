@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.sbisecurities.in
+
+# Sitemaps
+Sitemap: https://www.sbisecurities.in/sitemap.xml

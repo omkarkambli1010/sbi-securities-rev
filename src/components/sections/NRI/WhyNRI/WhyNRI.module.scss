@@ -1,18 +1,22 @@
 @import '../../../../styles/index';
 @import '../../../../styles/abstracts/nri-variables';
 
+// ============================================
+// WHY NRI — Figma: 1440x760, #F8F9FA bg
+// ============================================
+
 .section {
-  padding: $spacing-4xl 0;
-  background: $nri-bg-gray;
+  padding: 80px 0;
+  background: #F8F9FA;
 }
 
 .container {
   max-width: $container-2xl;
   margin: 0 auto;
-  padding: 0 $spacing-lg;
+  padding: 0 46px;
 
-  @include respond-to('md') {
-    padding: 0 $spacing-xl;
+  @include respond-to('sm') {
+    padding: 0 24px;
   }
 }
 
@@ -21,13 +25,15 @@
   font-weight: $font-bold;
   color: $nri-indigo;
   text-align: center;
-  margin-bottom: $spacing-2xl;
+  margin-bottom: 48px;
+  line-height: 1.2;
 }
 
+// 4-col grid on desktop, 2 on tablet, 1 on mobile
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-xl;
+  gap: 24px;
 
   @include respond-to('sm') {
     grid-template-columns: repeat(2, 1fr);
@@ -38,39 +44,54 @@
   }
 }
 
+// ============================================
+// CARD — 318x244px, 32px padding, 8px radius
+// ============================================
+
 .featureCard {
   background: $white;
-  border-radius: $radius-xl;
-  padding: $spacing-xl;
-  box-shadow: $shadow-sm;
-  @include transition(all);
-
-  &:hover {
-    box-shadow: $shadow-md;
-    transform: translateY(-2px);
-  }
+  border-radius: 8px;
+  padding: 32px;
+  // Figma two-layer shadow
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
 }
 
+// ============================================
+// CARD HEADER — icon + title side by side (Figma: horizontal, gap 16px)
+// ============================================
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// Icon: #00A7E1 cyan, no background wrapper — sits directly on card
 .iconWrapper {
-  width: 48px;
-  height: 48px;
-  border-radius: $radius-lg;
-  background: rgba($nri-indigo, 0.08);
-  @include flex-center;
-  margin-bottom: $spacing-md;
-  color: $nri-indigo;
+  flex-shrink: 0;
+  color: $nri-cyan;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 .featureTitle {
-  font-size: $text-xl;
+  font-size: 20px;
   font-weight: $font-semibold;
   color: $nri-indigo;
-  margin-bottom: $spacing-sm;
-  line-height: $leading-snug;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .featureDescription {
   font-size: $text-base;
   color: $nri-text-gray;
   line-height: $leading-relaxed;
+  margin: 0;
 }

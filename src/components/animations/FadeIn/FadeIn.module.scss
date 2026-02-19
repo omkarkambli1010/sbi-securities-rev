@@ -1,5 +1,5 @@
 @import '../../../styles/index';
 
 .fadeIn {
-  will-change: transform, opacity;
+  /* will-change removed — caused GPU layer artifacts bleeding into adjacent sections */
 }

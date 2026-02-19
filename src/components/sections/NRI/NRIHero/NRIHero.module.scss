@@ -1,166 +1,234 @@
 @import '../../../../styles/index';
 @import '../../../../styles/abstracts/nri-variables';
 
+// ============================================
+// HERO — 1440×600 desktop (Figma exact)
+// ============================================
+
 .hero {
   position: relative;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, rgba(248, 248, 255, 0.95), rgba(240, 238, 255, 0.9));
+  width: 100%;
+  background: $white;
   overflow: hidden;
+  isolation: isolate; // create own stacking context — prevents parent blend artifacts
+
+  // Mobile: stacked, tall enough for content + form
+  min-height: 800px;
+  display: flex;
+  align-items: flex-start;
+
+  @include respond-to('xl') {
+    min-height: unset;
+    height: 600px;
+    align-items: center;
+  }
 }
 
-.heroBackground {
+// ============================================
+// AIRPORT BACKGROUND + GRADIENT OVERLAY
+// ============================================
+
+.heroBg {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 60%;
+  inset: 0;
   z-index: 0;
+}
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
+// Gradient: fully opaque white on text side → subtle on right
+.heroGradient {
+  position: absolute;
+  inset: 0;
+  // Mobile: solid white overlay
+  background: rgba(255, 255, 255, 1);
 
-  @include mobile-only {
-    width: 100%;
-    opacity: 0.15;
+  @include respond-to('xl') {
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1) 0%,       // left — fully white, no bleed behind text
+      rgba(255, 255, 255, 1) 30%,      // keep fully white through text content area
+      rgba(255, 255, 255, 0.7) 50%,    // center — family photo area
+      rgba(255, 255, 255, 0.9) 72%,    // approaching form
+      rgba(255, 255, 255, 0.96) 100%   // form area — nearly white
+    );
   }
 }
+
+// ============================================
+// NRI FAMILY PHOTO (separate element, centered)
+// Figma: x=582, y=162 from hero top, 397×438px, bottom-anchored
+// ============================================
+
+.familyImageWrap {
+  display: none; // hidden on mobile
+
+  @include respond-to('xl') {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    // 582/1440 ≈ 40.4% from left — positions family in center gap
+    left: 40%;
+    width: 28%;  // 397/1440 ≈ 27.6%
+    height: 73%; // 438/600 = 73%
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+// ============================================
+// MAIN CONTAINER — text (left) + form (right)
+// ============================================
 
 .container {
   position: relative;
-  z-index: 1;
-  max-width: $container-2xl;
+  z-index: 2; // sits above family photo and background
   width: 100%;
+  max-width: $container-2xl;
   margin: 0 auto;
-  padding: $spacing-2xl $spacing-lg;
   display: flex;
   flex-direction: column;
-  gap: $spacing-2xl;
+  padding: 40px 20px;
+  gap: 32px;
 
-  @include respond-to('lg') {
+  @include respond-to('xl') {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing-3xl $spacing-xl;
+    padding: 0 51px;
+    height: 600px;
+    gap: 0;
   }
 }
 
-.content {
-  flex: 1;
-  max-width: 550px;
+// ============================================
+// LEFT: TEXT CONTENT
+// ============================================
 
-  @include mobile-only {
-    max-width: 100%;
+.content {
+  width: 100%;
+
+  @include respond-to('xl') {
+    width: 480px;
+    flex-shrink: 0;
   }
 }
 
 .heading {
-  font-size: clamp($text-3xl, 4vw, $text-5xl);
+  color: $nri-indigo !important;
+  -webkit-text-fill-color: $nri-indigo !important; // prevent gradient-text bleed from global styles
   font-weight: $font-bold;
-  color: $nri-indigo;
-  line-height: $leading-tight;
-  margin-bottom: $spacing-md;
+  line-height: 1.2 !important;
+  margin-bottom: 16px;
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  text-rendering: auto !important; // override global optimizeLegibility — prevents Windows ClearType doubling
+  text-shadow: none !important;
+  transition: none !important; // opt out of global theme color transition
 }
 
 .subtitle {
-  font-size: $text-2xl;
   color: $nri-indigo;
-  margin-bottom: $spacing-md;
-
-  @include mobile-only {
-    font-size: $text-lg;
-  }
+  font-weight: $font-normal;
+  margin-bottom: 12px;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  text-rendering: auto;
+  text-shadow: none;
+  transition: none !important;
 }
 
 .tagline {
-  font-size: clamp($text-xl, 2.5vw, $text-3xl);
-  font-weight: $font-semibold;
   color: $nri-indigo;
-  line-height: $leading-snug;
-  margin-bottom: $spacing-xl;
+  font-weight: $font-semibold;
+  line-height: 1.4;
+  margin-bottom: 28px;
+  font-size: clamp(1rem, 2.5vw, 1.875rem);
+  text-rendering: auto;
+  text-shadow: none;
+  transition: none !important;
 }
 
 .ctas {
   display: flex;
-  gap: $spacing-md;
+  gap: 17px;
   flex-wrap: wrap;
 }
 
 .ctaButton {
   @include button-base;
-  padding: $spacing-sm $spacing-xl;
+  height: 52px;
+  padding: 0 28px;
   border: 2px solid $nri-indigo;
   color: $nri-indigo;
   background: transparent;
-  border-radius: $radius-full;
+  border-radius: 8px;
   font-size: $text-base;
   font-weight: $font-medium;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
 
   &:hover {
     background: $nri-indigo;
     color: $white;
   }
-}
-
-// Form Card
-.formWrapper {
-  width: 100%;
-  max-width: 420px;
-  flex-shrink: 0;
 
   @include mobile-only {
-    max-width: 100%;
+    padding: 0 16px;
+    font-size: $text-sm;
+  }
+}
+
+// ============================================
+// RIGHT: FORM CARD
+// ============================================
+
+.formWrapper {
+  width: 100%;
+  overflow: hidden;
+
+  @include respond-to('xl') {
+    width: 390px;
+    flex-shrink: 0;
   }
 }
 
 .formCard {
   background: $white;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-xl;
-  padding: $spacing-xl;
-  border: 1px solid rgba($nri-indigo, 0.08);
-}
-
-.formTitle {
-  font-size: $text-xl;
-  font-weight: $font-bold;
-  color: $nri-indigo;
-  text-align: center;
-  margin-bottom: $spacing-lg;
-}
-
-.formRow {
-  display: flex;
-  gap: $spacing-sm;
-  margin-bottom: $spacing-md;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xs;
-  flex: 1;
-}
-
-.formLabel {
-  font-size: $text-xs;
-  color: $gray-600;
-  font-weight: $font-medium;
-}
-
-.formInput {
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  padding: 18px 16px 20px;
+  overflow: hidden;
+  box-sizing: border-box;
   width: 100%;
-  padding: $spacing-sm $spacing-md;
-  border: 1px solid $gray-300;
-  border-radius: $radius-md;
+}
+
+// Gradient title — indigo → pink
+.formTitle {
+  font-size: 18px;
+  font-weight: $font-bold;
+  text-align: center;
+  margin-bottom: 14px;
+  line-height: 1.4;
+  background: linear-gradient(90deg, $nri-indigo 0%, $nri-magenta 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ============================================
+// FORM FIELDS
+// ============================================
+
+// Shared input style
+.formInput {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
   font-size: $text-sm;
   font-family: $font-sans;
-  @include transition(border-color);
+  color: $gray-700;
+  background: $white;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -172,95 +240,155 @@
   }
 }
 
-.codeSelect {
-  width: 80px;
-  flex-shrink: 0;
+.fieldLabel {
+  display: block;
+  font-size: $text-xs;
+  color: $gray-600;
+  font-weight: $font-medium;
+  margin-bottom: 4px;
 }
 
-.accountTypeSection {
-  margin-bottom: $spacing-md;
+// Phone row: code (narrow) + mobile (wide)
+.phoneRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.codeGroup {
+  flex: 0 0 80px;
+}
+
+.codeSelect {
+  width: 80px;
+}
+
+.mobileGroup {
+  flex: 1;
+  min-width: 0;
+}
+
+// Single field group
+.fieldGroup {
+  margin-bottom: 10px;
+}
+
+// ============================================
+// ACCOUNT TYPE — 2-column (label | radios)
+// ============================================
+
+.accountTypeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .accountTypeLabel {
   font-size: $text-xs;
   font-weight: $font-medium;
   color: $gray-900;
-  margin-bottom: $spacing-sm;
-  display: block;
+  flex: 0 0 80px;
+  line-height: 1.5;
+  padding-top: 2px;
 }
 
 .radioGroup {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 6px;
+  min-width: 0;
 }
 
 .radioLabel {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-xs;
+  gap: 6px;
   font-size: $text-xs;
   color: $gray-900;
   cursor: pointer;
-  line-height: $leading-snug;
+  line-height: 1.45;
+  word-break: break-word;
 
   input[type='radio'] {
     margin-top: 2px;
     accent-color: $nri-indigo;
     flex-shrink: 0;
   }
+
+  span {
+    flex: 1;
+    min-width: 0;
+  }
 }
+
+// ============================================
+// CHECKBOXES
+// ============================================
 
 .checkboxLabel {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-xs;
+  gap: 8px;
   font-size: $text-xs;
   color: $gray-900;
   cursor: pointer;
-  margin-bottom: $spacing-sm;
-  line-height: $leading-snug;
+  margin-bottom: 8px;
+  line-height: 1.5;
 
   input[type='checkbox'] {
-    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    margin-top: 1px;
     accent-color: $nri-indigo;
     flex-shrink: 0;
+    cursor: pointer;
   }
 
-  a {
-    color: $nri-indigo;
-    text-decoration: underline;
+  span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+    min-width: 0;
   }
 }
 
-.rmQuestion {
-  font-size: $text-xs;
-  color: $gray-900;
-  margin-bottom: $spacing-sm;
-}
+// ============================================
+// RESUME LINK + SUBMIT
+// ============================================
 
 .resumeLink {
   font-size: $text-sm;
-  color: $nri-indigo;
   text-decoration: underline;
   cursor: pointer;
-  margin-bottom: $spacing-md;
+  margin-bottom: 12px;
   display: inline-block;
+  background: linear-gradient(90deg, $nri-indigo 0%, $nri-magenta 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.submitRow {
+  display: flex;
+  justify-content: center;
 }
 
 .submitButton {
   @include button-base;
-  width: 100%;
-  padding: $spacing-sm $spacing-xl;
-  background: $nri-magenta;
+  width: 146px;
+  height: 36px;
+  background: linear-gradient(90deg, $nri-indigo 0%, $nri-magenta 100%);
   color: $white;
   border: none;
-  border-radius: $radius-md;
-  font-size: $text-base;
+  border-radius: 6px;
+  font-size: $text-sm;
   font-weight: $font-semibold;
   cursor: pointer;
 
   &:hover {
-    background: darken($nri-magenta, 8%);
+    opacity: 0.88;
   }
 }

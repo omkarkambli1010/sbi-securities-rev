@@ -1,14 +1,14 @@
 export const NRI_FEATURES = [
   {
     id: 'brand-trust',
-    icon: 'ShieldCheck',
+    icon: 'Shield',
     title: 'Brand Trust',
     description:
       "Backed by the strength of SBI, India's most trusted and largest public sector bank.",
   },
   {
     id: 'easy-account',
-    icon: 'FileCheck',
+    icon: 'FileText',
     title: 'Easy Account opening',
     description: 'Hassle-free online process with minimal documentation.',
   },
@@ -21,35 +21,35 @@ export const NRI_FEATURES = [
   },
   {
     id: 'swift-resolution',
-    icon: 'Headphones',
+    icon: 'MessageSquare',
     title: 'Swift query Resolution',
     description:
       'Get expert assistance and guidance tailored specifically for NRIs.',
   },
   {
     id: 'pis-compliant',
-    icon: 'ClipboardCheck',
+    icon: 'CircleCheck',
     title: 'Portfolio Investment Scheme (PIS) Compliant',
     description:
       "Invest in Indian markets in full compliance with RBI's Portfolio Investment Scheme (PIS) regulations.",
   },
   {
     id: 'repatriation',
-    icon: 'ArrowUpRight',
+    icon: 'TrendingUp',
     title: 'Repatriation Benefits',
     description:
       'Conveniently transfer your profits and investments abroad with the NRE account (repatriation basis).',
   },
   {
     id: 'realtime-access',
-    icon: 'TrendingUp',
+    icon: 'Zap',
     title: 'Real-Time Market Access',
     description:
       'Stay updated with real-time stock quotes, charts, and research insights to make informed decisions.',
   },
   {
     id: 'competitive-charges',
-    icon: 'BadgePercent',
+    icon: 'IndianRupee',
     title: 'Competitive Charges',
     description:
       'Transparent and competitive brokerage charges, ensuring value for your investments.',

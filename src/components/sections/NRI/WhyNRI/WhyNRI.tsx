@@ -1,29 +1,29 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import {
-  ShieldCheck,
-  FileCheck,
+  Shield,
+  FileText,
   Layers,
-  Headphones,
-  ClipboardCheck,
-  ArrowUpRight,
+  MessageSquare,
+  CircleCheck,
   TrendingUp,
-  BadgePercent,
+  Zap,
+  IndianRupee,
 } from 'lucide-react';
 import { FadeIn } from '@/components/animations/FadeIn/FadeIn';
 import { NRI_FEATURES } from '@/data/nri';
 import styles from './WhyNRI.module.scss';
 
 const iconMap: Record<string, React.ReactNode> = {
-  ShieldCheck: <ShieldCheck size={24} />,
-  FileCheck: <FileCheck size={24} />,
-  Layers: <Layers size={24} />,
-  Headphones: <Headphones size={24} />,
-  ClipboardCheck: <ClipboardCheck size={24} />,
-  ArrowUpRight: <ArrowUpRight size={24} />,
-  TrendingUp: <TrendingUp size={24} />,
-  BadgePercent: <BadgePercent size={24} />,
+  Shield: <Shield size={40} strokeWidth={1.75} />,
+  FileText: <FileText size={40} strokeWidth={1.75} />,
+  Layers: <Layers size={40} strokeWidth={1.75} />,
+  MessageSquare: <MessageSquare size={40} strokeWidth={1.75} />,
+  CircleCheck: <CircleCheck size={40} strokeWidth={1.75} />,
+  TrendingUp: <TrendingUp size={40} strokeWidth={1.75} />,
+  Zap: <Zap size={40} strokeWidth={1.75} />,
+  IndianRupee: <IndianRupee size={40} strokeWidth={1.75} />,
 };
 
 export function WhyNRI() {
@@ -37,12 +37,14 @@ export function WhyNRI() {
         </FadeIn>
         <div className={styles.grid}>
           {NRI_FEATURES.map((feature, index) => (
-            <FadeIn key={feature.id} delay={index * 0.1}>
+            <FadeIn key={feature.id} delay={index * 0.08}>
               <div className={styles.featureCard}>
-                <div className={styles.iconWrapper}>
-                  {iconMap[feature.icon]}
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconWrapper}>
+                    {iconMap[feature.icon]}
+                  </div>
+                  <h3 className={styles.featureTitle}>{feature.title}</h3>
                 </div>
-                <h3 className={styles.featureTitle}>{feature.title}</h3>
                 <p className={styles.featureDescription}>
                   {feature.description}
                 </p>
