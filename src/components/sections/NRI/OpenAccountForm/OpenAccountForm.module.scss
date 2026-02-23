@@ -54,7 +54,11 @@
   margin-bottom: $spacing-xl;
 
   @include respond-to('md') {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('xl') {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

@@ -22,17 +22,31 @@ export function TrustedGateway() {
           </p>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <div className={styles.videoWrapper}>
-            <Image
-              src="/images/nri/video-thumbnail.png"
-              alt="NRI 3-in-1 Account - PIS + Demat + Trading A/c"
-              width={700}
-              height={400}
-              style={{ width: '100%', height: 'auto' }}
-            />
-            <button className={styles.playButton} aria-label="Play video">
-              <Play size={28} fill="white" />
-            </button>
+          <div className={styles.videosGrid}>
+            <div className={styles.videoWrapper}>
+              <Image
+                src="/images/nri/video-thumbnail.png"
+                alt="NRI 3-in-1 Account - PIS + Demat + Trading A/c"
+                width={570}
+                height={316}
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <button className={styles.playButton} aria-label="Play video">
+                <Play size={28} fill="white" />
+              </button>
+            </div>
+            <div className={styles.videoWrapper}>
+              <Image
+                src="/images/nri/video-thumbnail.png"
+                alt="NRI Account Benefits"
+                width={570}
+                height={316}
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <button className={styles.playButton} aria-label="Play video">
+                <Play size={28} fill="white" />
+              </button>
+            </div>
           </div>
         </FadeIn>
       </div>

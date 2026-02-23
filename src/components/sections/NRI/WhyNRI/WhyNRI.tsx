@@ -16,14 +16,14 @@ import { NRI_FEATURES } from '@/data/nri';
 import styles from './WhyNRI.module.scss';
 
 const iconMap: Record<string, React.ReactNode> = {
-  Shield: <Shield size={40} strokeWidth={1.75} />,
-  FileText: <FileText size={40} strokeWidth={1.75} />,
-  Layers: <Layers size={40} strokeWidth={1.75} />,
-  MessageSquare: <MessageSquare size={40} strokeWidth={1.75} />,
-  CircleCheck: <CircleCheck size={40} strokeWidth={1.75} />,
-  TrendingUp: <TrendingUp size={40} strokeWidth={1.75} />,
-  Zap: <Zap size={40} strokeWidth={1.75} />,
-  IndianRupee: <IndianRupee size={40} strokeWidth={1.75} />,
+  Shield: <Shield size={48} strokeWidth={1.75} />,
+  FileText: <FileText size={48} strokeWidth={1.75} />,
+  Layers: <Layers size={48} strokeWidth={1.75} />,
+  MessageSquare: <MessageSquare size={48} strokeWidth={1.75} />,
+  CircleCheck: <CircleCheck size={48} strokeWidth={1.75} />,
+  TrendingUp: <TrendingUp size={48} strokeWidth={1.75} />,
+  Zap: <Zap size={48} strokeWidth={1.75} />,
+  IndianRupee: <IndianRupee size={48} strokeWidth={1.75} />,
 };
 
 export function WhyNRI() {

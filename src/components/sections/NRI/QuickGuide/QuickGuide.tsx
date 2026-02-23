@@ -22,17 +22,31 @@ export function QuickGuide() {
           </p>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <div className={styles.videoWrapper}>
-            <Image
-              src="/images/nri/video-thumbnail.png"
-              alt="Quick guide to opening NRI account digitally"
-              width={700}
-              height={400}
-              style={{ width: '100%', height: 'auto' }}
-            />
-            <button className={styles.playButton} aria-label="Play video guide">
-              <Play size={28} fill="white" />
-            </button>
+          <div className={styles.videosGrid}>
+            <div className={styles.videoWrapper}>
+              <Image
+                src="/images/nri/video-thumbnail.png"
+                alt="Quick guide to opening NRI account digitally"
+                width={570}
+                height={316}
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <button className={styles.playButton} aria-label="Play video guide">
+                <Play size={28} fill="white" />
+              </button>
+            </div>
+            <div className={styles.videoWrapper}>
+              <Image
+                src="/images/nri/video-thumbnail.png"
+                alt="NRI account opening steps"
+                width={570}
+                height={316}
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <button className={styles.playButton} aria-label="Play video steps">
+                <Play size={28} fill="white" />
+              </button>
+            </div>
           </div>
         </FadeIn>
       </div>

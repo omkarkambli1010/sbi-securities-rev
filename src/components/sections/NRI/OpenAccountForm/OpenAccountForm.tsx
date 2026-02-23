@@ -6,6 +6,7 @@ import styles from './OpenAccountForm.module.scss';
 
 export function OpenAccountForm() {
   const [formData, setFormData] = useState({
+    residentialStatus: '',
     fullName: '',
     overseasLocation: '',
     countryCode: '+91',
@@ -42,6 +43,23 @@ export function OpenAccountForm() {
         <FadeIn delay={0.2}>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formRow}>
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>
+                  Residential Status <span className={styles.required}>*</span>
+                </label>
+                <select
+                  name="residentialStatus"
+                  className={styles.formSelect}
+                  value={formData.residentialStatus}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Status</option>
+                  <option value="nre">NRE (Non-Resident External)</option>
+                  <option value="nro">NRO (Non-Resident Ordinary)</option>
+                  <option value="fcnr">FCNR (Foreign Currency)</option>
+                </select>
+              </div>
               <div className={styles.formGroup}>
                 <label className={styles.formLabel}>
                   Full Name <span className={styles.required}>*</span>

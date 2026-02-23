@@ -62,10 +62,10 @@
 }
 
 .iconCircle {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: $radius-full;
-  background: rgba($nri-indigo, 0.06);
+  background: #e3f2fd;
   @include flex-center;
   margin: 0 auto $spacing-lg;
   color: $nri-indigo;

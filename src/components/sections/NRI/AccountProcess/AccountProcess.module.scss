@@ -90,14 +90,14 @@
 
 .stepNumber {
   @include flex-center;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
   border-radius: $radius-full;
   background: $nri-magenta;
   color: $white;
   font-weight: $font-semibold;
-  font-size: $text-sm;
+  font-size: $text-base;
   flex-shrink: 0;
 }
 
